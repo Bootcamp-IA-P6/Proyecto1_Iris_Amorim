@@ -8,7 +8,7 @@ import os
 
 # Default rates (cost per second)
 DEFAULT_RATES = {
-    "stopped": 0.02,   # €0.02 per second when taxi is not moving
+    "stopped": 0.02,   # €0.02 per second when taxi is stopped
     "moving": 0.05     # €0.05 per second when taxi is moving
 }
 
@@ -71,8 +71,8 @@ def save_trip_to_history(stopped_time, moving_time, total_fare):
 # --------------------------------------------------------------------
 
 def taximeter():
-    print("Welcome to the F5 Digital Taximeter!")
-    print("Commands: start, stop, move, finish, show, rates, history, exit\n")
+    print("Welcome to the Digital Taximeter!")
+    print("Please, choose one of the following commands: start, stop, move, finish, show, rates, history, exit\n")
 
     # Internal state variables
     trip_active = False
