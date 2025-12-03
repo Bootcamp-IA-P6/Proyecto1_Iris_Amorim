@@ -70,6 +70,7 @@ def save_trip_to_history(stopped_time, moving_time, total_fare):
 # CORE PROGRAM (CLI TAXIMETER)
 # --------------------------------------------------------------------
 
+
 def taximeter():
     print("Welcome to the Digital Taximeter!")
     print("Please, choose one of the following commands: start, stop, move, finish, show, rates, history, exit\n")
