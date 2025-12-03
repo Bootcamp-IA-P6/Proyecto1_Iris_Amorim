@@ -69,8 +69,9 @@ cd taximetro
 
 python3 main.py
 
+```
 
-## Ejemplo de uso
+## 💻 Ejemplo de uso
 
 > start
 Trip started. Current state: 'stopped'.
@@ -87,20 +88,20 @@ Stopped time : 3.2 seconds
 Moving time  : 12.5 seconds
 Total fare   : €0.73
 
+---
 
-🧪 Mejoras futuras
+## 🧪 Mejoras futuras
 
 Interfaz gráfica (Tkinter o Qt)
 Base de datos real (SQLite)
 Sistema de GPS simulado
 Versión móvil o web
 
-🤝 Contribuciones
+## 🤝 Contribuciones
 
 Este proyecto es educativo y abierto a mejoras.
 
-
-🙋‍♀️ Autor
+## 🙋‍♀️ Autor
 
 Iris Fernanda Amorim
 Proyecto de aprendizaje y práctica de Python3.
