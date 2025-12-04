@@ -49,8 +49,8 @@ def calculate_fare(seconds_stopped, seconds_moving, rates):
     - stopped time  * stopped rate
     - moving time   * moving rate
     """
-    return (seconds_stopped * rates["stopped"]
-            + seconds_moving * rates["moving"])
+    return (seconds_stopped * rates["stopped"] + seconds_moving * rates["moving"])
+
 
 
 def save_trip_to_history(stopped_time, moving_time, total_fare):
@@ -72,8 +72,35 @@ def save_trip_to_history(stopped_time, moving_time, total_fare):
 
 
 def taximeter():
-    print("Welcome to the Digital Taximeter!")
-    print("Please, choose one of the following commands: start, stop, move, finish, show, rates, history, exit\n")
+    print("="*60)
+    print(" 🚕 Welcome to the Interactive Digital Taximeter! 🚕")
+    print("="*60)
+    
+    # Welcome Text and Options Presentation
+    print("\nThis system simulates a digital taximeter based on travel time.")
+    print("Use the commands below to manage the taxi trip.\n")
+    
+    print("### 🛠️ Available Commands and Their Functions ###")
+    print("-" * 40)
+    
+    # List of commands with descriptions
+    commands_description = [
+        ("🏁 start", "Initiate a new trip. The taximeter starts in the 'stopped' state."),
+        ("🟢 move", "Changes the taxi state to 'moving' (moving time starts counting)."),
+        ("🛑 stop", "Changes the taxi state to 'stopped' (stopped time starts counting)."),
+        ("👁️  show", "Displays the current partial fare without ending the trip."),
+        ("💵 finish", "Calculates and displays the final fare, ends the trip, and saves history."),
+        ("⚙️  rates", "Views or configures the calculation rates (stopped/moving)."),
+        ("📜 history", "Displays the history of completed trips."),
+        ("❌ exit", "Closes the taximeter program.")
+    ]
+    # Print the formatted list/table
+    for command, description in commands_description:
+        # Using f-string for aligned output
+        print(f" {command:<8}: {description}")
+
+    print("-" * 40)
+    print("\n**Please type a command to begin (E.g.: start):**\n")
 
     # Internal state variables
     trip_active = False
@@ -91,7 +118,7 @@ def taximeter():
         # --------------------------------------------------------
         if command == "start":
             if trip_active:
-                print("A trip is already in progress.")
+                print("🛣️  A trip is already in progress.")
                 continue
 
             trip_active = True
@@ -100,14 +127,14 @@ def taximeter():
             state = "stopped"               # taxi always starts stopped
             state_start_time = time.time()  # start counting time
 
-            print("Trip started. Current state: 'stopped'.")
+            print("🏁 Trip started. Current state: '🛑 stopped'.")
 
         # --------------------------------------------------------
         # CHANGE STATE (stop/move)
         # --------------------------------------------------------
         elif command in ("stop", "move"):
             if not trip_active:
-                print("No active trip. Start a trip first.")
+                print("⚠️  No active trip. Start a trip first.")
                 continue
 
             # How long we were in the previous state?
@@ -119,7 +146,7 @@ def taximeter():
                 moving_time += duration
 
             # Change the state now
-            state = "stopped" if command == "stop" else "moving"
+            state = "🛑 stopped" if command == "stop" else "🟢 moving"
             state_start_time = time.time()
 
             print(f"State changed to '{state}'.")
@@ -129,7 +156,7 @@ def taximeter():
         # --------------------------------------------------------
         elif command == "show":
             if not trip_active:
-                print("No active trip.")
+                print("⚠️ No active trip.")
                 continue
 
             # Temporary calculation including the current running state
@@ -146,7 +173,7 @@ def taximeter():
         # --------------------------------------------------------
         elif command == "finish":
             if not trip_active:
-                print("No active trip to finish.")
+                print("⚠️  No active trip to finish.")
                 continue
 
             # Add any remaining time in the last active state
@@ -211,14 +238,14 @@ def taximeter():
         # EXIT PROGRAM
         # --------------------------------------------------------
         elif command == "exit":
-            print("Exiting program. Goodbye!")
+            print("👋 Exiting the Interactive Digital Taximeter. Goodbye! 🚪")
             break
 
         # --------------------------------------------------------
         # UNKNOWN COMMAND
         # --------------------------------------------------------
         else:
-            print("Unknown command. Use: start, stop, move, finish, show, rates, history, exit")
+            print("❗ Unknown command. Use: start, stop, move, finish, show, rates, history, exit")
 
 
 # --------------------------------------------------------------------
