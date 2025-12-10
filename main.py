@@ -2,11 +2,11 @@ import time
 import json
 import os
 
-# --------------------------------------------------------------------
-# DEFAULT CONFIGURATION
-# --------------------------------------------------------------------
 
-# Default rates (cost per second)
+# DEFAULT CONFIGURATION
+"""
+Default rates (cost per second) 
+"""
 DEFAULT_RATES = {
     "stopped": 0.02,   # €0.02 per second when taxi is stopped
     "moving": 0.05     # €0.05 per second when taxi is moving
@@ -15,11 +15,7 @@ DEFAULT_RATES = {
 RATES_FILE = "rates.json"
 HISTORY_FILE = "history.txt"
 
-
-# --------------------------------------------------------------------
 # RATE MANAGEMENT
-# --------------------------------------------------------------------
-
 def load_rates():
     """
     Load pricing rates from a JSON file.
@@ -39,10 +35,8 @@ def save_rates(rates):
         json.dump(rates, f)
 
 
-# --------------------------------------------------------------------
-# FARE CALCULATION AND HISTORY SAVING
-# --------------------------------------------------------------------
 
+# FARE CALCULATION AND HISTORY SAVING
 def calculate_fare(seconds_stopped, seconds_moving, rates):
     """
     Calculate the total fare in euros based on:
@@ -50,7 +44,6 @@ def calculate_fare(seconds_stopped, seconds_moving, rates):
     - moving time   * moving rate
     """
     return (seconds_stopped * rates["stopped"] + seconds_moving * rates["moving"])
-
 
 
 def save_trip_to_history(stopped_time, moving_time, total_fare):
@@ -66,21 +59,17 @@ def save_trip_to_history(stopped_time, moving_time, total_fare):
         )
 
 
-# --------------------------------------------------------------------
+
 # CORE PROGRAM (CLI TAXIMETER)
-# --------------------------------------------------------------------
-
-
 def taximeter():
+    print("="*60) 
+    print("🚕 Welcome to the Interactive Digital Taximeter! 🚕")
     print("="*60)
-    print(" 🚕 Welcome to the Interactive Digital Taximeter! 🚕")
-    print("="*60)
-    
     # Welcome Text and Options Presentation
     print("\nThis system simulates a digital taximeter based on travel time.")
     print("Use the commands below to manage the taxi trip.\n")
     
-    print("### 🛠️ Available Commands and Their Functions ###")
+    print("### 🛠️  Available Commands and Their Functions ###")
     print("-" * 40)
     
     # List of commands with descriptions
@@ -113,9 +102,8 @@ def taximeter():
     while True:
         command = input("> ").strip().lower()
 
-        # --------------------------------------------------------
+        
         # START TRIP
-        # --------------------------------------------------------
         if command == "start":
             if trip_active:
                 print("🛣️  A trip is already in progress.")
@@ -129,9 +117,8 @@ def taximeter():
 
             print("🏁 Trip started. Current state: '🛑 stopped'.")
 
-        # --------------------------------------------------------
+        
         # CHANGE STATE (stop/move)
-        # --------------------------------------------------------
         elif command in ("stop", "move"):
             if not trip_active:
                 print("⚠️  No active trip. Start a trip first.")
@@ -151,9 +138,8 @@ def taximeter():
 
             print(f"State changed to '{state}'.")
 
-        # --------------------------------------------------------
+        
         # SHOW PARTIAL FARE WITHOUT ENDING TRIP
-        # --------------------------------------------------------
         elif command == "show":
             if not trip_active:
                 print("⚠️ No active trip.")
@@ -168,9 +154,8 @@ def taximeter():
             partial_fare = calculate_fare(temp_stopped, temp_moving, rates)
             print(f"Current fare: €{partial_fare:.2f}")
 
-        # --------------------------------------------------------
+        
         # FINISH TRIP
-        # --------------------------------------------------------
         elif command == "finish":
             if not trip_active:
                 print("⚠️  No active trip to finish.")
@@ -199,9 +184,7 @@ def taximeter():
             trip_active = False
             state = None
 
-        # --------------------------------------------------------
         # MODIFY RATES
-        # --------------------------------------------------------
         elif command == "rates":
             print(f"Current rates:")
             print(f"   Stopped: €{rates['stopped']} per second")
@@ -222,9 +205,8 @@ def taximeter():
             except ValueError:
                 print("Invalid input. Rates not updated.")
 
-        # --------------------------------------------------------
+        
         # SHOW HISTORY
-        # --------------------------------------------------------
         elif command == "history":
             if not os.path.exists(HISTORY_FILE):
                 print("No trip history yet.")
@@ -234,23 +216,17 @@ def taximeter():
                     print(f.read())
                     print("---------------------\n")
 
-        # --------------------------------------------------------
+       
         # EXIT PROGRAM
-        # --------------------------------------------------------
         elif command == "exit":
             print("👋 Exiting the Interactive Digital Taximeter. Goodbye! 🚪")
             break
 
-        # --------------------------------------------------------
         # UNKNOWN COMMAND
-        # --------------------------------------------------------
         else:
             print("❗ Unknown command. Use: start, stop, move, finish, show, rates, history, exit")
 
 
-# --------------------------------------------------------------------
 # MAIN ENTRY POINT
-# --------------------------------------------------------------------
-
 if __name__ == "__main__":
     taximeter()
