@@ -21,7 +21,6 @@ PROYECTO1_IRIS_AMORIM/
 │ ├── rates.json
 │
 ├── GUI_taximeter/
-│ ├── .venv/
 │ ├── app.py                  ← Aplicación Streamlit (GUI)
 │ ├── history.txt
 │ ├── rates.json
