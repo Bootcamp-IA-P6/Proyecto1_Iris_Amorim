@@ -1,78 +1,144 @@
+# 🚕 Taxímetro Digital en Python  
+**Versión CLI + GUI (Streamlit)**
 
-# 🚕 Taxímetro Digital en Python
+Este proyecto es un **taxímetro digital moderno**, desarrollado en Python como actividad del Módulo I de la formación en IA con Python en la Factoría F5 – Madrid.
 
-Este proyecto es un prototipo funcional de un **taxímetro digital moderno**, implementado en Python, como actividade del modulo 1 de la formación en IA con python de la Factoría F5 - Madrid.  
+Incluye dos implementaciones completas:
 
-Permite calcular tarifas basadas en el tiempo que el taxi se encuentra **parado** o **en movimiento**, registrar historiales y configurar precios dinámicamente.
+- **CLI_taximeter** → versión de consola para aprender lógica paso a paso  
+- **GUI_taximeter** → versión gráfica interactiva construida con **Streamlit**
 
----
+Ambos sistemas permiten calcular tarifas en función del tiempo parado o en movimiento, almacenar el historial y configurar precios dinámicamente.
+
+## 📁 Estructura del Proyecto
+
+```
+PROYECTO1_IRIS_AMORIM/
+│
+├── CLI_taximeter/
+│ ├── history.txt
+│ ├── main.py
+│ ├── rates.json
+│
+├── GUI_taximeter/
+│ ├── .venv/
+│ ├── app.py                  ← Aplicación Streamlit (GUI)
+│ ├── history.txt
+│ ├── rates.json
+│ ├── requirements.txt
+│
+├── .gitignore
+└── README.md
+```
+
+📌 *La CLI y la GUI funcionan de manera independiente*, cada una con sus propios archivos de tarifas e historial.
+
 
 ## 🎯 Objetivos del Proyecto
 
-- Modernizar el sistema tradicional de taxímetros.
-- Crear un sistema preciso, simple y fácil de expandir.
-- Ofrecer una interfaz CLI clara para aprender programación paso a paso.
-- Guardar el historial de trayectos.
-- Permitir modificar las tarifas según necesidad.
+- Modernizar el funcionamiento tradicional de un taxímetro.  
+- Proporcionar un sistema **preciso, simple y ampliable**.  
+- Practicar programación estructurada (CLI) y programación reactiva (Streamlit).  
+- Registrar historiales de viajes.  
+- Permitir tarifas configurables por el usuario.
 
----
 
 ## 🧩 Funcionalidades Principales
 
-### 🟢 Nivel Esencial (CLI)
-- Iniciar un trayecto (`start`)
-- Cambiar estado a **parado** (`stop`)
-- Cambiar estado a **en movimiento** (`move`)
-- Finalizar trayecto (`finish`)
-- Mostrar tarifa parcial (`show`)
-- Salir del programa (`exit`)
+### 🟢 CLI (Versión Esencial)
 
-### 🟠 Nivel Medio
-- Guardar historial de trayectos en `history.txt`
-- Configurar tarifas personalizadas mediante `rates.json`
-- Ver tarifas actuales y modificarlas con el comando `rates`
-- Consultar historial con el comando `history`
+Comandos disponibles:
 
----
+- `start` → iniciar viaje  
+- `stop` → marcar estado **parado**  
+- `move` → marcar estado **moviendo**  
+- `finish` → finalizar viaje  
+- `show` → mostrar coste parcial  
+- `rates` → ver/modificar tarifas  
+- `history` → ver historial  
+- `exit` → salir  
+
+### 🟣 GUI (Versión Avanzada en Streamlit)
+
+La interfaz gráfica permite:
+
+- Iniciar o finalizar una carrera con botones.  
+- Cambiar entre estados **🛑 parado** y **🟢 moviendo**.  
+- Ver el coste actualizado en tiempo real.  
+- Ver contadores de tiempo parado/moviendo.  
+- Ajustar tarifas desde la barra lateral.  
+- Guardar viajes automáticamente en `history.txt`.  
+- Leer el historial desde la propia aplicación.  
+
 
 ## 📦 Archivos importantes
 
-| Archivo        | Descripción |
-|----------------|-------------|
-| `main.py`      | Lógica principal del taxímetro en CLI. |
-| `rates.json`   | Archivo de configuración para tarifas personalizadas. |
-| `history.txt`  | Registro histórico de viajes completados. |
+| Archivo | Ubicación | Descripción |
+|---------|-----------|-------------|
+| `main.py` | `/CLI_taximeter` | Implementación del taxímetro en terminal. |
+| `app.py` | `/GUI_taximeter` | Aplicación Streamlit con interfaz gráfica. |
+| `rates.json` | En cada módulo | Tarifas personalizadas de “parado” y “movimiento”. |
+| `history.txt` | En cada módulo | Registro de viajes realizados. |
+| `requirements.txt` | `/GUI_taximeter` | Dependencias necesarias para ejecutar la GUI. |
 
----
 
 ## 🧠 ¿Cómo funciona el cálculo del taxímetro?
 
-El sistema utiliza dos cronómetros:
+El sistema calcula el precio total mediante dos cronómetros:
 
-- **⏱️ Tiempo parado** → tarifa por segundo más baja  
-- **🚕 Tiempo en movimiento** → tarifa por segundo más alta  
+- **⏱️ Tiempo Parado** → tarifa baja (€/s)  
+- **🚕 Tiempo en Movimiento** → tarifa alta (€/s)
 
-Cada vez que el usuario cambia de estado, el programa calcula cuánto tiempo ha pasado desde el estado anterior y actualiza los contadores.
+Cada vez que el estado cambia, se calcula el tiempo transcurrido desde la última marca y se suma al contador correspondiente.
 
----
-
-## ▶️ Cómo ejecutar el programa
-
-1. Asegúrate de tener **Python 3** instalado.
-2. Clona el repositorio:
-
-```bash
-git clone https://github.com/IrisFernandaAmorim/taximetro
-cd taximetro
-
-3. Ejecuta el programa:
-
-python3 main.py
-
+Fórmula del coste total:
+```
+total = (tiempo_parado * tarifa_parado)
++ (tiempo_moviendo * tarifa_movimiento)
 ```
 
-## 💻 Ejemplo de uso
 
+## ▶️ Cómo ejecutar el proyecto
+
+### 🟢 Modo CLI
+
+**1.** Instala Python 3  
+**2.** Clona el repositorio:
+```
+git clone https://github.com/Bootcamp-IA-P6/Proyecto1_Iris_Amorim
+cd Proyecto1_Iris_Amorim/CLI_taximeter
+```
+
+**3.** Ejecuta:
+```
+python3 main.py
+```
+
+### 🟣 Modo GUI (Streamlit)
+
+**1.** Entra en la carpeta GUI:
+```
+cd GUI_taximeter
+```
+
+**2.** (Opcional) Activa el entorno virtual:
+```
+source .venv/bin/activate      # macOS / Linux  
+.\.venv\Scripts\activate       # Windows
+```
+
+**3.** Instala dependencias:
+```
+pip install -r requirements.txt
+```
+
+**4.** Ejecuta la aplicación:
+```
+streamlit run app.py
+```
+
+## 💻 Ejemplo de uso (CLI)
+```
 > start
 Trip started. Current state: 'stopped'.
 
@@ -83,32 +149,28 @@ State changed to 'moving'.
 Current fare: €0.25
 
 > finish
- 
 --- Trip Summary ---
-
 Stopped time : 3.2 seconds
-
 Moving time  : 12.5 seconds
-
 Total fare   : €0.73
-
----
+```
 
 ## 🧪 Mejoras futuras
 
-Interfaz gráfica (Tkinter o Qt)
-
-Base de datos real (SQLite)
-
-Sistema de GPS simulado
-
-Versión móvil o web
+- Conexión con base de datos (SQL)
+- Simulación de GPS o velocidad
+- Dashboard analítico de viajes
+- Versión móvil / web avanzada
+- Exportación del historial en PDF o CSV
 
 ## 🤝 Contribuciones
 
-Este proyecto es educativo y abierto a mejoras.
+Proyecto educativo, abierto a sugerencias y mejoras.
 
-## 🙋‍♀️ Autor
+## 🙋‍♀️ Autora
 
 Iris Fernanda Amorim
-Proyecto de aprendizaje y práctica de Python3.
+
+Proyecto práctico de aprendizaje de Python.
+
+
