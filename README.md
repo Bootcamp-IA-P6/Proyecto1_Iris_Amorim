@@ -118,6 +118,24 @@ cd Proyecto1_Iris_Amorim/CLI_taximeter
 python3 main.py
 ```
 
+**Ejemplo de uso (CLI)**
+```
+> start
+Trip started. Current state: 'stopped'.
+
+> move
+State changed to 'moving'.
+
+> show
+Current fare: €0.25
+
+> finish
+--- Trip Summary ---
+Stopped time : 3.2 seconds
+Moving time  : 12.5 seconds
+Total fare   : €0.73
+```
+
 ### 🟣 Modo GUI (Streamlit)
 
 **1.** Entra en la carpeta GUI:
@@ -140,24 +158,12 @@ pip install -r requirements.txt
 ```
 streamlit run app.py
 ```
+**Vista de la interfaz (GUI)**
 
-## 💻 Ejemplo de uso (CLI)
-```
-> start
-Trip started. Current state: 'stopped'.
+Aquí puedes ver la interfaz principal del *Taxímetro Digital Interactivo* en modo GUI:
 
-> move
-State changed to 'moving'.
+![Captura de pantalla de la interfaz GUI](/assets/GUI_taximeter_img.png)
 
-> show
-Current fare: €0.25
-
-> finish
---- Trip Summary ---
-Stopped time : 3.2 seconds
-Moving time  : 12.5 seconds
-Total fare   : €0.73
-```
 
 ## 🧪 Mejoras futuras
 
