@@ -24,6 +24,8 @@ Ambos sistemas permiten calcular tarifas en función del tiempo parado o en movi
 ```
 PROYECTO1_IRIS_AMORIM/
 │
+├── assets/
+│
 ├── CLI_taximeter/
 │   ├── main.py             # Versión en consola (CLI)
 │   ├── rates.json          # Tarifas configurables
