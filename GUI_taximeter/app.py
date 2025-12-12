@@ -114,6 +114,7 @@ current_fare = (
     st.session_state.total_stopped * st.session_state.rates["stopped"] +
     st.session_state.total_moving * st.session_state.rates["moving"]
 )
+# ------------------------------------------------------
 
 # ------------------- DISPLAY INFORMATION --------------
 col1, col2 = st.columns(2)

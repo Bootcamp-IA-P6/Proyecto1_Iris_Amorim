@@ -244,8 +244,9 @@ def taximeter():
         else:
             logging.warning(f"Unknown command: {command}")
             print("❗ Unknown command. Use: start, stop, move, finish, show, rates, history, exit")
+# ------------------------------------------------------
 
-
-# MAIN ENTRY POINT
+# --------------- MAIN ENTRY POINT ---------------------
 if __name__ == "__main__":
     taximeter()
+# ------------------------------------------------------
